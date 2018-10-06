@@ -1,4 +1,3 @@
----
 messages: 
-  - type: string
-    value: Olá {{ username }}, acesse {{ url_cadastro }} e cadastre-se
+  value: Olá {{ username }}, acesse {{ url_cadastro }} e cadastre-se
+  extra:
