@@ -1,0 +1,31 @@
+{
+  "name": "assistente",
+  "description": "assistente-backend",
+  "version": "0.1.12",
+  "homepage": "https://assistente.dev.org.br",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": "Guilherme Lunhani <lunhanig@gmail.com>",
+  "contributors": [],
+  "engines": {
+    "node": ">= 8.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "js-yaml": "^3.12.0",
+    "telegraf": "^3.24.0",
+    "winston": "^3.0.0",
+    "chalk":"^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.gitlab.com/install/tg-bot"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

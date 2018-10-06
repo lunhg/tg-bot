@@ -1,0 +1,9 @@
+version: '2'
+services:
+  bot:
+    image: redelivre/alpine-telegraf
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - "TOKEN=$TELEGRAM_TOKEN"

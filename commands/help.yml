@@ -1,0 +1,7 @@
+messages:
+  - value: Clique no tópico de ajuda desejado
+    extra:
+      reply_markup:
+        - keyboard:
+            - /servicos
+            - /faq
