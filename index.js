@@ -1,33 +1,27 @@
-const Telegraf = require('telegraf');
-const session = require('telegraf/session');
-const api = require('./api');
-const render = require('./render');
-const logger = require('./logger')
-const start = require('./start');
-const help = require('./help');
-const errorHandler = require('./error');
-// Use telegraf as Express framework
-// Middlewares
-const telegraf = new Telegraf(process.env.TOKEN);
-telegraf.use(logger());
-telegraf.catch((err) => {
-  let msg = `Error ${err.code}: ${err.message}`;
-  console.log(err.stack);
-});
-telegraf.use(session());
-telegraf.use(render());
-telegraf.use(api({
-  name: 'assistente',
-  url: 'https://api.assistente.dev.org.br'
-}));
-telegraf.use(errorHandler())
+const express = require('express');
+const app = express();
+const bodyParser = require('bodyParser');
+const lib = require('./lib');
+const tgBot = require('./app');
 
-// like get, post, etc... in express
-telegraf.start(start)
-telegraf.help(help);
+app.use(bodyParser.json());
+app.set('port', 3000);
 
-// Start
-telegraf.startPolling(30, 100, null, function(){
-  console.log('===> tg- bot stopped');
+app.post('/start', function(req, res){
+  lib.check(req).then(function(result){
+    let status = result.status
+    status = status && result.messages.length === 1
+    status = status && result.messages[0] === 'authorized'
+    if(status){
+      let options = result.mesages[1];
+      delete result.messages[1];
+      return tgBot(options)
+    }
+  }).then(function(result){
+    res.json(result)
+  })
 });
-console.log('===> tg-bot v0.0.1 started')
+
+app.listen(app.get('port'), function(){
+  console.log(`===> tg-bot listening at ::${app.get('port')}`);
+})

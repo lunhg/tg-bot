@@ -1,9 +1,13 @@
 version: '2'
 services:
+  
   bot:
-    image: redelivre/alpine-telegraf
+    image: redelivre/alpine-node:${NODE_VERSION}-telegraf
     build:
       context: .
-      dockerfile: Dockerfile
-    environment:
-      - "TOKEN=$TELEGRAM_TOKEN"
+      dockerfile: Dockerfile.${NODE_VERSION}
+      args:
+        - "username=$username"
+        - "botname=$TELEGRAM_NAME"
+        - "token=$TELEGRAM_TOKEN"
+        - "domain=$TELEGRAM_DOMAIN"

@@ -1,8 +1,8 @@
 {
-  "name": "assistente",
+  "name": "tg.bot.dev.org.br",
   "description": "assistente-backend",
   "version": "0.1.12",
-  "homepage": "https://assistente.dev.org.br",
+  "homepage": "https://api.assistente.dev.org.br",
   "main": "src",
   "keywords": [
     "feathers"
