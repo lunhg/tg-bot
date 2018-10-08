@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('bodyParser');
+const bodyParser = require('body-parser');
 const lib = require('./lib');
 const tgBot = require('./app');
 
@@ -15,11 +15,13 @@ app.post('/start', function(req, res){
     if(status){
       let options = result.mesages[1];
       delete result.messages[1];
-      return tgBot(options)
+      return tgBot(options).then(function(){
+        res.send({
+          message: results.messages.join(',')
+        })
+      });
     }
-  }).then(function(result){
-    res.json(result)
-  })
+  });
 });
 
 app.listen(app.get('port'), function(){

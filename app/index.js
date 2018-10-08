@@ -1,6 +1,5 @@
 // control the bot from a simple api
 const atob = require('atob');
-const graphqlHTTP = require('express-graphql');
 const lib = require('../lib');
 const routes = require('../routes');
 const Telegraf = require('telegraf');
@@ -16,10 +15,13 @@ module.exports = function(options){
     name: options.name,
     url: options.url
   }));
-  telegraf.use(errorHandler())
-
+  telegraf.use(lib.errorHandler())
+  telegraf.user(lib.routes())
   // Start
   return new Promise(function(resolve, reject){
-    resolve(telegraf);
+    telegraf.startPolling(30, 100, function(){
+      console.log('==> telegraf stopped')
+    })
+    resolve()
   })
 }
